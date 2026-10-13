@@ -35,12 +35,12 @@ export async function uploadPdfFile(publicationId: string, file: File, onProgres
   if (!token) throw new Error("Your session has expired. Please sign in again.");
   const base = file.name.replace(/\.pdf$/i, "");
   const path = `${publicationId}/${Date.now()}-${slugify(base) || "paper"}.pdf`;
-  const url = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/${BUCKET}/${path}`;
+  const url = `${import.meta.env['VITE_SUPABASE_URL']}/storage/v1/object/${BUCKET}/${path}`;
   await new Promise<void>((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", url);
     xhr.setRequestHeader("Authorization", `Bearer ${token}`);
-    xhr.setRequestHeader("apikey", import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY);
+    xhr.setRequestHeader("apikey", import.meta.env['VITE_SUPABASE_PUBLISHABLE_KEY']);
     xhr.setRequestHeader("Content-Type", "application/pdf");
     xhr.setRequestHeader("x-upsert", "false");
     xhr.upload.onprogress = (e) => e.lengthComputable && onProgress?.(Math.round((e.loaded / e.total) * 100));

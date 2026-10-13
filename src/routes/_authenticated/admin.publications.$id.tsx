@@ -106,7 +106,7 @@ function EditPublication() {
       if (isNew) {
         const slug = await uniqueSlug("publications", form.title);
         const { data: u } = await supabase.auth.getUser();
-        const { data, error } = await supabase.from("publications").insert({ ...payload, slug, created_by: u.user?.id }).select("id").single();
+        const { data, error } = await supabase.from("publications").insert({ ...payload, slug, created_by: u.user?.id ?? null }).select("id").single();
         if (error) throw error;
         pubId = data.id;
       } else {
@@ -233,8 +233,8 @@ function EditPublication() {
                   <option value="">Not linked to a profile</option>
                   {researchers.map((r) => <option key={r.id} value={r.id}>{r.name}{r.active ? "" : " (inactive)"}</option>)}
                 </select>
-                <Button type="button" size="icon" variant="ghost" aria-label="Move up" disabled={i === 0} onClick={() => { const n = [...form.authors]; [n[i - 1], n[i]] = [n[i], n[i - 1]]; up("authors", n); }}><ArrowUp className="h-4 w-4" /></Button>
-                <Button type="button" size="icon" variant="ghost" aria-label="Move down" disabled={i === form.authors.length - 1} onClick={() => { const n = [...form.authors]; [n[i + 1], n[i]] = [n[i], n[i + 1]]; up("authors", n); }}><ArrowDown className="h-4 w-4" /></Button>
+                <Button type="button" size="icon" variant="ghost" aria-label="Move up" disabled={i === 0} onClick={() => { const n = [...form.authors]; const t = n[i]!; n[i] = n[i - 1]!; n[i - 1] = t; up("authors", n); }}><ArrowUp className="h-4 w-4" /></Button>
+                <Button type="button" size="icon" variant="ghost" aria-label="Move down" disabled={i === form.authors.length - 1} onClick={() => { const n = [...form.authors]; const t = n[i]!; n[i] = n[i + 1]!; n[i + 1] = t; up("authors", n); }}><ArrowDown className="h-4 w-4" /></Button>
                 <Button type="button" size="icon" variant="ghost" aria-label="Remove author" onClick={() => up("authors", form.authors.filter((_, j) => j !== i))}><X className="h-4 w-4" /></Button>
               </li>
             ))}

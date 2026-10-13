@@ -46,7 +46,7 @@ export const linksToText = (l: unknown) =>
   (Array.isArray(l) ? (l as { label: string; url: string }[]) : []).map((x) => `${x.label} | ${x.url}`).join("\n");
 export function textToLinks(s: string): { label: string; url: string }[] {
   return s.split("\n").map((line) => line.trim()).filter(Boolean).map((line) => {
-    const [label, url] = line.includes("|") ? line.split("|").map((x) => x.trim()) : [line, line];
-    return { label, url };
+    const parts = line.includes("|") ? line.split("|").map((x) => x.trim()) : [line, line];
+    return { label: parts[0] ?? "", url: parts[1] ?? "" };
   }).filter((l) => /^https?:\/\//.test(l.url));
 }

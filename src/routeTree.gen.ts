@@ -28,6 +28,7 @@ import { Route as ResearchersSlugRouteImport } from './routes/researchers.$slug'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
 import { Route as AuthenticatedAdminAccessRouteImport } from './routes/_authenticated/admin.access'
 import { Route as AuthenticatedAdminDivisionsRouteImport } from './routes/_authenticated/admin.divisions'
+import { Route as AuthenticatedAdminImportRouteImport } from './routes/_authenticated/admin.import'
 import { Route as AuthenticatedAdminNewsRouteImport } from './routes/_authenticated/admin.news'
 import { Route as AuthenticatedAdminProjectsRouteImport } from './routes/_authenticated/admin.projects'
 import { Route as AuthenticatedAdminResearchersRouteImport } from './routes/_authenticated/admin.researchers'
@@ -130,6 +131,12 @@ const AuthenticatedAdminDivisionsRoute =
     path: '/divisions',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const AuthenticatedAdminImportRoute =
+  AuthenticatedAdminImportRouteImport.update({
+    id: '/import',
+    path: '/import',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const AuthenticatedAdminNewsRoute = AuthenticatedAdminNewsRouteImport.update({
   id: '/news',
   path: '/news',
@@ -178,6 +185,7 @@ export interface FileRoutesByFullPath {
   '/researchers/': typeof ResearchersIndexRoute
   '/admin/access': typeof AuthenticatedAdminAccessRoute
   '/admin/divisions': typeof AuthenticatedAdminDivisionsRoute
+  '/admin/import': typeof AuthenticatedAdminImportRoute
   '/admin/news': typeof AuthenticatedAdminNewsRoute
   '/admin/projects': typeof AuthenticatedAdminProjectsRoute
   '/admin/researchers': typeof AuthenticatedAdminResearchersRoute
@@ -202,6 +210,7 @@ export interface FileRoutesByTo {
   '/researchers': typeof ResearchersIndexRoute
   '/admin/access': typeof AuthenticatedAdminAccessRoute
   '/admin/divisions': typeof AuthenticatedAdminDivisionsRoute
+  '/admin/import': typeof AuthenticatedAdminImportRoute
   '/admin/news': typeof AuthenticatedAdminNewsRoute
   '/admin/projects': typeof AuthenticatedAdminProjectsRoute
   '/admin/researchers': typeof AuthenticatedAdminResearchersRoute
@@ -229,6 +238,7 @@ export interface FileRoutesById {
   '/researchers/': typeof ResearchersIndexRoute
   '/_authenticated/admin/access': typeof AuthenticatedAdminAccessRoute
   '/_authenticated/admin/divisions': typeof AuthenticatedAdminDivisionsRoute
+  '/_authenticated/admin/import': typeof AuthenticatedAdminImportRoute
   '/_authenticated/admin/news': typeof AuthenticatedAdminNewsRoute
   '/_authenticated/admin/projects': typeof AuthenticatedAdminProjectsRoute
   '/_authenticated/admin/researchers': typeof AuthenticatedAdminResearchersRoute
@@ -256,6 +266,7 @@ export interface FileRouteTypes {
     | '/researchers/'
     | '/admin/access'
     | '/admin/divisions'
+    | '/admin/import'
     | '/admin/news'
     | '/admin/projects'
     | '/admin/researchers'
@@ -280,6 +291,7 @@ export interface FileRouteTypes {
     | '/researchers'
     | '/admin/access'
     | '/admin/divisions'
+    | '/admin/import'
     | '/admin/news'
     | '/admin/projects'
     | '/admin/researchers'
@@ -306,6 +318,7 @@ export interface FileRouteTypes {
     | '/researchers/'
     | '/_authenticated/admin/access'
     | '/_authenticated/admin/divisions'
+    | '/_authenticated/admin/import'
     | '/_authenticated/admin/news'
     | '/_authenticated/admin/projects'
     | '/_authenticated/admin/researchers'
@@ -467,6 +480,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminDivisionsRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/import': {
+      id: '/_authenticated/admin/import'
+      path: '/import'
+      fullPath: '/admin/import'
+      preLoaderRoute: typeof AuthenticatedAdminImportRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/news': {
       id: '/_authenticated/admin/news'
       path: '/news'
@@ -508,6 +528,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminAccessRoute: typeof AuthenticatedAdminAccessRoute
   AuthenticatedAdminDivisionsRoute: typeof AuthenticatedAdminDivisionsRoute
+  AuthenticatedAdminImportRoute: typeof AuthenticatedAdminImportRoute
   AuthenticatedAdminNewsRoute: typeof AuthenticatedAdminNewsRoute
   AuthenticatedAdminProjectsRoute: typeof AuthenticatedAdminProjectsRoute
   AuthenticatedAdminResearchersRoute: typeof AuthenticatedAdminResearchersRoute
@@ -519,6 +540,7 @@ interface AuthenticatedAdminRouteChildren {
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminAccessRoute: AuthenticatedAdminAccessRoute,
   AuthenticatedAdminDivisionsRoute: AuthenticatedAdminDivisionsRoute,
+  AuthenticatedAdminImportRoute: AuthenticatedAdminImportRoute,
   AuthenticatedAdminNewsRoute: AuthenticatedAdminNewsRoute,
   AuthenticatedAdminProjectsRoute: AuthenticatedAdminProjectsRoute,
   AuthenticatedAdminResearchersRoute: AuthenticatedAdminResearchersRoute,

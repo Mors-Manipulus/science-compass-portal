@@ -41,7 +41,7 @@ export function parseCSV(text: string): RawRow[] {
   row.push(cell);
   if (row.some((v) => v.trim() !== "")) rows.push(row);
   if (rows.length === 0) return [];
-  const headers = rows[0].map((h) => h.trim());
+  const headers = rows[0]!.map((h) => h.trim());
   return rows.slice(1).map((r) => Object.fromEntries(headers.map((h, i) => [h, (r[i] ?? "").trim()])));
 }
 

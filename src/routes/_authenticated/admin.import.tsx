@@ -49,7 +49,7 @@ function ImportPage() {
     setBusy(true);
     try {
       const { data: u } = await supabase.auth.getUser();
-      const { data: batch, error } = await supabase.from("import_batches").insert({ created_by: u.user?.id, file_name: fileName, format, total: preview.length }).select("id").single();
+      const { data: batch, error } = await supabase.from("import_batches").insert({ created_by: u.user?.id ?? null, file_name: fileName, format, total: preview.length }).select("id").single();
       if (error) throw error;
       const { data: researchers } = await supabase.from("researchers").select("id,name");
       const byName = new Map((researchers ?? []).map((r) => [r.name.toLowerCase().replace(/^dr\.?\s+/, ""), r.id]));
@@ -60,7 +60,7 @@ function ImportPage() {
         try {
           const { data: p, error: e1 } = await supabase.from("publications").insert({
             slug: await uniqueSlug("publications", r.title), title: r.title, abstract: r.abstract, pub_date: r.pub_date, venue: r.venue, doi: r.doi,
-            status: "in_review", source_system: "legacy", source_id: r.source_id, import_batch_id: batch.id, created_by: u.user?.id,
+            status: "in_review", source_system: "legacy", source_id: r.source_id, import_batch_id: batch.id, created_by: u.user?.id ?? null,
           }).select("id").single();
           if (e1) throw e1;
           if (r.authors.length) await supabase.from("publication_authors").insert(r.authors.map((a, i) => ({ publication_id: p.id, position: i + 1, author_name: a, researcher_id: byName.get(a.toLowerCase().replace(/^dr\.?\s+/, "")) ?? null })));
