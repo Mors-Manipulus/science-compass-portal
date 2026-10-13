@@ -10,33 +10,339 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as DivisionsIndexRouteImport } from './routes/divisions.index'
+import { Route as DivisionsSlugRouteImport } from './routes/divisions.$slug'
+import { Route as NewsIndexRouteImport } from './routes/news.index'
+import { Route as NewsSlugRouteImport } from './routes/news.$slug'
+import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
+import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
+import { Route as PublicationsIndexRouteImport } from './routes/publications.index'
+import { Route as PublicationsSlugRouteImport } from './routes/publications.$slug'
+import { Route as ResearchersIndexRouteImport } from './routes/researchers.index'
+import { Route as ResearchersSlugRouteImport } from './routes/researchers.$slug'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
+import { Route as AuthenticatedAdminAccessRouteImport } from './routes/_authenticated/admin.access'
+import { Route as AuthenticatedAdminDivisionsRouteImport } from './routes/_authenticated/admin.divisions'
+import { Route as AuthenticatedAdminImportRouteImport } from './routes/_authenticated/admin.import'
+import { Route as AuthenticatedAdminNewsRouteImport } from './routes/_authenticated/admin.news'
+import { Route as AuthenticatedAdminProjectsRouteImport } from './routes/_authenticated/admin.projects'
+import { Route as AuthenticatedAdminResearchersRouteImport } from './routes/_authenticated/admin.researchers'
+import { Route as AuthenticatedAdminPublicationsIndexRouteImport } from './routes/_authenticated/admin.publications.index'
+import { Route as AuthenticatedAdminPublicationsIdRouteImport } from './routes/_authenticated/admin.publications.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const DivisionsIndexRoute = DivisionsIndexRouteImport.update({
+  id: '/divisions/',
+  path: '/divisions/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DivisionsSlugRoute = DivisionsSlugRouteImport.update({
+  id: '/divisions/$slug',
+  path: '/divisions/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsIndexRoute = NewsIndexRouteImport.update({
+  id: '/news/',
+  path: '/news/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsSlugRoute = NewsSlugRouteImport.update({
+  id: '/news/$slug',
+  path: '/news/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
+  id: '/projects/',
+  path: '/projects/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
+  id: '/projects/$slug',
+  path: '/projects/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PublicationsIndexRoute = PublicationsIndexRouteImport.update({
+  id: '/publications/',
+  path: '/publications/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PublicationsSlugRoute = PublicationsSlugRouteImport.update({
+  id: '/publications/$slug',
+  path: '/publications/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResearchersIndexRoute = ResearchersIndexRouteImport.update({
+  id: '/researchers/',
+  path: '/researchers/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResearchersSlugRoute = ResearchersSlugRouteImport.update({
+  id: '/researchers/$slug',
+  path: '/researchers/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
+const AuthenticatedAdminAccessRoute =
+  AuthenticatedAdminAccessRouteImport.update({
+    id: '/access',
+    path: '/access',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminDivisionsRoute =
+  AuthenticatedAdminDivisionsRouteImport.update({
+    id: '/divisions',
+    path: '/divisions',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminImportRoute =
+  AuthenticatedAdminImportRouteImport.update({
+    id: '/import',
+    path: '/import',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminNewsRoute = AuthenticatedAdminNewsRouteImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
+const AuthenticatedAdminProjectsRoute =
+  AuthenticatedAdminProjectsRouteImport.update({
+    id: '/projects',
+    path: '/projects',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminResearchersRoute =
+  AuthenticatedAdminResearchersRouteImport.update({
+    id: '/researchers',
+    path: '/researchers',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminPublicationsIndexRoute =
+  AuthenticatedAdminPublicationsIndexRouteImport.update({
+    id: '/publications/',
+    path: '/publications/',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminPublicationsIdRoute =
+  AuthenticatedAdminPublicationsIdRouteImport.update({
+    id: '/publications/$id',
+    path: '/publications/$id',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
+  '/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/divisions/$slug': typeof DivisionsSlugRoute
+  '/news/$slug': typeof NewsSlugRoute
+  '/projects/$slug': typeof ProjectsSlugRoute
+  '/publications/$slug': typeof PublicationsSlugRoute
+  '/researchers/$slug': typeof ResearchersSlugRoute
+  '/divisions/': typeof DivisionsIndexRoute
+  '/news/': typeof NewsIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
+  '/publications/': typeof PublicationsIndexRoute
+  '/researchers/': typeof ResearchersIndexRoute
+  '/admin/access': typeof AuthenticatedAdminAccessRoute
+  '/admin/divisions': typeof AuthenticatedAdminDivisionsRoute
+  '/admin/import': typeof AuthenticatedAdminImportRoute
+  '/admin/news': typeof AuthenticatedAdminNewsRoute
+  '/admin/projects': typeof AuthenticatedAdminProjectsRoute
+  '/admin/researchers': typeof AuthenticatedAdminResearchersRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/admin/publications/$id': typeof AuthenticatedAdminPublicationsIdRoute
+  '/admin/publications/': typeof AuthenticatedAdminPublicationsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
+  '/divisions/$slug': typeof DivisionsSlugRoute
+  '/news/$slug': typeof NewsSlugRoute
+  '/projects/$slug': typeof ProjectsSlugRoute
+  '/publications/$slug': typeof PublicationsSlugRoute
+  '/researchers/$slug': typeof ResearchersSlugRoute
+  '/divisions': typeof DivisionsIndexRoute
+  '/news': typeof NewsIndexRoute
+  '/projects': typeof ProjectsIndexRoute
+  '/publications': typeof PublicationsIndexRoute
+  '/researchers': typeof ResearchersIndexRoute
+  '/admin/access': typeof AuthenticatedAdminAccessRoute
+  '/admin/divisions': typeof AuthenticatedAdminDivisionsRoute
+  '/admin/import': typeof AuthenticatedAdminImportRoute
+  '/admin/news': typeof AuthenticatedAdminNewsRoute
+  '/admin/projects': typeof AuthenticatedAdminProjectsRoute
+  '/admin/researchers': typeof AuthenticatedAdminResearchersRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
+  '/admin/publications/$id': typeof AuthenticatedAdminPublicationsIdRoute
+  '/admin/publications': typeof AuthenticatedAdminPublicationsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/divisions/$slug': typeof DivisionsSlugRoute
+  '/news/$slug': typeof NewsSlugRoute
+  '/projects/$slug': typeof ProjectsSlugRoute
+  '/publications/$slug': typeof PublicationsSlugRoute
+  '/researchers/$slug': typeof ResearchersSlugRoute
+  '/divisions/': typeof DivisionsIndexRoute
+  '/news/': typeof NewsIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
+  '/publications/': typeof PublicationsIndexRoute
+  '/researchers/': typeof ResearchersIndexRoute
+  '/_authenticated/admin/access': typeof AuthenticatedAdminAccessRoute
+  '/_authenticated/admin/divisions': typeof AuthenticatedAdminDivisionsRoute
+  '/_authenticated/admin/import': typeof AuthenticatedAdminImportRoute
+  '/_authenticated/admin/news': typeof AuthenticatedAdminNewsRoute
+  '/_authenticated/admin/projects': typeof AuthenticatedAdminProjectsRoute
+  '/_authenticated/admin/researchers': typeof AuthenticatedAdminResearchersRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/admin/publications/$id': typeof AuthenticatedAdminPublicationsIdRoute
+  '/_authenticated/admin/publications/': typeof AuthenticatedAdminPublicationsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/auth'
+    | '/contact'
+    | '/admin'
+    | '/divisions/$slug'
+    | '/news/$slug'
+    | '/projects/$slug'
+    | '/publications/$slug'
+    | '/researchers/$slug'
+    | '/divisions/'
+    | '/news/'
+    | '/projects/'
+    | '/publications/'
+    | '/researchers/'
+    | '/admin/access'
+    | '/admin/divisions'
+    | '/admin/import'
+    | '/admin/news'
+    | '/admin/projects'
+    | '/admin/researchers'
+    | '/admin/'
+    | '/admin/publications/$id'
+    | '/admin/publications/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/auth'
+    | '/contact'
+    | '/divisions/$slug'
+    | '/news/$slug'
+    | '/projects/$slug'
+    | '/publications/$slug'
+    | '/researchers/$slug'
+    | '/divisions'
+    | '/news'
+    | '/projects'
+    | '/publications'
+    | '/researchers'
+    | '/admin/access'
+    | '/admin/divisions'
+    | '/admin/import'
+    | '/admin/news'
+    | '/admin/projects'
+    | '/admin/researchers'
+    | '/admin'
+    | '/admin/publications/$id'
+    | '/admin/publications'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/about'
+    | '/auth'
+    | '/contact'
+    | '/_authenticated/admin'
+    | '/divisions/$slug'
+    | '/news/$slug'
+    | '/projects/$slug'
+    | '/publications/$slug'
+    | '/researchers/$slug'
+    | '/divisions/'
+    | '/news/'
+    | '/projects/'
+    | '/publications/'
+    | '/researchers/'
+    | '/_authenticated/admin/access'
+    | '/_authenticated/admin/divisions'
+    | '/_authenticated/admin/import'
+    | '/_authenticated/admin/news'
+    | '/_authenticated/admin/projects'
+    | '/_authenticated/admin/researchers'
+    | '/_authenticated/admin/'
+    | '/_authenticated/admin/publications/$id'
+    | '/_authenticated/admin/publications/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AboutRoute: typeof AboutRoute
+  AuthRoute: typeof AuthRoute
+  ContactRoute: typeof ContactRoute
+  DivisionsSlugRoute: typeof DivisionsSlugRoute
+  NewsSlugRoute: typeof NewsSlugRoute
+  ProjectsSlugRoute: typeof ProjectsSlugRoute
+  PublicationsSlugRoute: typeof PublicationsSlugRoute
+  ResearchersSlugRoute: typeof ResearchersSlugRoute
+  DivisionsIndexRoute: typeof DivisionsIndexRoute
+  NewsIndexRoute: typeof NewsIndexRoute
+  ProjectsIndexRoute: typeof ProjectsIndexRoute
+  PublicationsIndexRoute: typeof PublicationsIndexRoute
+  ResearchersIndexRoute: typeof ResearchersIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +354,232 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/divisions/': {
+      id: '/divisions/'
+      path: '/divisions'
+      fullPath: '/divisions/'
+      preLoaderRoute: typeof DivisionsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/divisions/$slug': {
+      id: '/divisions/$slug'
+      path: '/divisions/$slug'
+      fullPath: '/divisions/$slug'
+      preLoaderRoute: typeof DivisionsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news/': {
+      id: '/news/'
+      path: '/news'
+      fullPath: '/news/'
+      preLoaderRoute: typeof NewsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news/$slug': {
+      id: '/news/$slug'
+      path: '/news/$slug'
+      fullPath: '/news/$slug'
+      preLoaderRoute: typeof NewsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects/': {
+      id: '/projects/'
+      path: '/projects'
+      fullPath: '/projects/'
+      preLoaderRoute: typeof ProjectsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects/$slug': {
+      id: '/projects/$slug'
+      path: '/projects/$slug'
+      fullPath: '/projects/$slug'
+      preLoaderRoute: typeof ProjectsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/publications/': {
+      id: '/publications/'
+      path: '/publications'
+      fullPath: '/publications/'
+      preLoaderRoute: typeof PublicationsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/publications/$slug': {
+      id: '/publications/$slug'
+      path: '/publications/$slug'
+      fullPath: '/publications/$slug'
+      preLoaderRoute: typeof PublicationsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/researchers/': {
+      id: '/researchers/'
+      path: '/researchers'
+      fullPath: '/researchers/'
+      preLoaderRoute: typeof ResearchersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/researchers/$slug': {
+      id: '/researchers/$slug'
+      path: '/researchers/$slug'
+      fullPath: '/researchers/$slug'
+      preLoaderRoute: typeof ResearchersSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/access': {
+      id: '/_authenticated/admin/access'
+      path: '/access'
+      fullPath: '/admin/access'
+      preLoaderRoute: typeof AuthenticatedAdminAccessRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/divisions': {
+      id: '/_authenticated/admin/divisions'
+      path: '/divisions'
+      fullPath: '/admin/divisions'
+      preLoaderRoute: typeof AuthenticatedAdminDivisionsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/import': {
+      id: '/_authenticated/admin/import'
+      path: '/import'
+      fullPath: '/admin/import'
+      preLoaderRoute: typeof AuthenticatedAdminImportRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/news': {
+      id: '/_authenticated/admin/news'
+      path: '/news'
+      fullPath: '/admin/news'
+      preLoaderRoute: typeof AuthenticatedAdminNewsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/projects': {
+      id: '/_authenticated/admin/projects'
+      path: '/projects'
+      fullPath: '/admin/projects'
+      preLoaderRoute: typeof AuthenticatedAdminProjectsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/researchers': {
+      id: '/_authenticated/admin/researchers'
+      path: '/researchers'
+      fullPath: '/admin/researchers'
+      preLoaderRoute: typeof AuthenticatedAdminResearchersRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/publications/': {
+      id: '/_authenticated/admin/publications/'
+      path: '/publications'
+      fullPath: '/admin/publications/'
+      preLoaderRoute: typeof AuthenticatedAdminPublicationsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/publications/$id': {
+      id: '/_authenticated/admin/publications/$id'
+      path: '/publications/$id'
+      fullPath: '/admin/publications/$id'
+      preLoaderRoute: typeof AuthenticatedAdminPublicationsIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
   }
 }
 
+interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminAccessRoute: typeof AuthenticatedAdminAccessRoute
+  AuthenticatedAdminDivisionsRoute: typeof AuthenticatedAdminDivisionsRoute
+  AuthenticatedAdminImportRoute: typeof AuthenticatedAdminImportRoute
+  AuthenticatedAdminNewsRoute: typeof AuthenticatedAdminNewsRoute
+  AuthenticatedAdminProjectsRoute: typeof AuthenticatedAdminProjectsRoute
+  AuthenticatedAdminResearchersRoute: typeof AuthenticatedAdminResearchersRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminPublicationsIdRoute: typeof AuthenticatedAdminPublicationsIdRoute
+  AuthenticatedAdminPublicationsIndexRoute: typeof AuthenticatedAdminPublicationsIndexRoute
+}
+
+const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminAccessRoute: AuthenticatedAdminAccessRoute,
+  AuthenticatedAdminDivisionsRoute: AuthenticatedAdminDivisionsRoute,
+  AuthenticatedAdminImportRoute: AuthenticatedAdminImportRoute,
+  AuthenticatedAdminNewsRoute: AuthenticatedAdminNewsRoute,
+  AuthenticatedAdminProjectsRoute: AuthenticatedAdminProjectsRoute,
+  AuthenticatedAdminResearchersRoute: AuthenticatedAdminResearchersRoute,
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  AuthenticatedAdminPublicationsIdRoute: AuthenticatedAdminPublicationsIdRoute,
+  AuthenticatedAdminPublicationsIndexRoute:
+    AuthenticatedAdminPublicationsIndexRoute,
+}
+
+const AuthenticatedAdminRouteWithChildren =
+  AuthenticatedAdminRoute._addFileChildren(AuthenticatedAdminRouteChildren)
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AboutRoute: AboutRoute,
+  AuthRoute: AuthRoute,
+  ContactRoute: ContactRoute,
+  DivisionsSlugRoute: DivisionsSlugRoute,
+  NewsSlugRoute: NewsSlugRoute,
+  ProjectsSlugRoute: ProjectsSlugRoute,
+  PublicationsSlugRoute: PublicationsSlugRoute,
+  ResearchersSlugRoute: ResearchersSlugRoute,
+  DivisionsIndexRoute: DivisionsIndexRoute,
+  NewsIndexRoute: NewsIndexRoute,
+  ProjectsIndexRoute: ProjectsIndexRoute,
+  PublicationsIndexRoute: PublicationsIndexRoute,
+  ResearchersIndexRoute: ResearchersIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
