@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { ArrowRight } from "lucide-react";
-import { divisionsQuery, featuredPublicationsQuery, newsQuery, projectsQuery, researchersQuery } from "@/lib/data/public";
+import { divisionsQuery, featuredPublicationsQuery, researchersQuery } from "@/lib/data/public";
 import { PublicationCard } from "@/components/site/Publication";
 import { seo } from "@/lib/seo";
 
@@ -15,8 +15,6 @@ export const Route = createFileRoute("/")({
     Promise.all([
       queryClient.ensureQueryData(divisionsQuery()),
       queryClient.ensureQueryData(featuredPublicationsQuery()),
-      queryClient.ensureQueryData(projectsQuery()),
-      queryClient.ensureQueryData(newsQuery(3)),
       queryClient.ensureQueryData(researchersQuery()),
     ]),
   component: Home,
@@ -39,8 +37,6 @@ function SectionHead({ eyebrow, title, to, cta }: { eyebrow: string; title: stri
 function Home() {
   const { data: divisions } = useSuspenseQuery(divisionsQuery());
   const { data: featured } = useSuspenseQuery(featuredPublicationsQuery());
-  const { data: projects } = useSuspenseQuery(projectsQuery());
-  const { data: news } = useSuspenseQuery(newsQuery(3));
   const { data: researchers } = useSuspenseQuery(researchersQuery());
   const leads = researchers.filter((r) => r.role_title.startsWith("Division Lead"));
 
