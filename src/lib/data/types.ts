@@ -18,6 +18,7 @@ export type PublicationListItem = {
   doi: string | null;
   pdf_path: string | null;
   pdf_name: string | null;
+  external_url: string | null;
   featured: boolean;
   status: string;
   visibility: string;
@@ -26,7 +27,7 @@ export type PublicationListItem = {
 };
 
 export const PUBLICATION_SELECT =
-  "id,slug,title,abstract,pub_date,year,venue,doi,pdf_path,pdf_name,featured,status,visibility,publication_authors(position,author_name,researcher_id,researchers(slug,name)),publication_divisions(divisions(slug,name,short_name))";
+  "id,slug,title,abstract,pub_date,year,venue,doi,pdf_path,pdf_name,external_url,featured,status,visibility,publication_authors(position,author_name,researcher_id,researchers(slug,name)),publication_divisions(divisions(slug,name,short_name))";
 
 export function sortedAuthors(p: PublicationListItem) {
   return [...p.publication_authors].sort((a, b) => a.position - b.position);

@@ -11,7 +11,7 @@ function Overview() {
     queryKey: ["admin-overview"],
     queryFn: async () => {
       const [pubs, pd, res, proj, news] = await Promise.all([
-        supabase.from("publications").select("id,status,pdf_path,abstract,pub_date"),
+        supabase.from("publications").select("id,status,pdf_path,external_url,abstract,pub_date"),
         supabase.from("publication_divisions").select("publication_id"),
         supabase.from("researchers").select("id", { count: "exact", head: true }).eq("active", true),
         supabase.from("projects").select("id", { count: "exact", head: true }),
@@ -23,7 +23,7 @@ function Overview() {
         total: p.length,
         byStatus: (["published", "in_review", "draft", "archived"] as const).map((s) => [s, p.filter((x) => x.status === s).length] as const),
         unassigned: p.filter((x) => !assigned.has(x.id)).length,
-        noPdf: p.filter((x) => !x.pdf_path && x.status !== "archived").length,
+        noPdf: p.filter((x) => !x.pdf_path && !x.external_url && x.status !== "archived").length,
         incomplete: p.filter((x) => !x.abstract || !x.pub_date).length,
         researchers: res.count ?? 0,
         projects: proj.count ?? 0,
