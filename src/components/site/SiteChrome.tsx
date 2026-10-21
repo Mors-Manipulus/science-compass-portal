@@ -6,8 +6,6 @@ const NAV = [
   { to: "/divisions", label: "Divisions" },
   { to: "/publications", label: "Publications" },
   { to: "/researchers", label: "Researchers" },
-  { to: "/projects", label: "Projects" },
-  { to: "/news", label: "News" },
   { to: "/about", label: "About" },
 ] as const;
 
@@ -83,7 +81,7 @@ export function SiteFooter() {
           <Logo />
           <p className="mt-4 max-w-sm text-sm text-muted-foreground">
             An independent research laboratory advancing machine intelligence, quantum science, medicine,
-            neurotechnology, robotics and open silicon.
+            neurotechnology, geopolitics and computer vision.
           </p>
         </div>
         <div>
