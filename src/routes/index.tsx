@@ -54,8 +54,8 @@ function Home() {
             Pushing the frontiers of intelligence, science <span className="text-primary">&amp;</span> human potential
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            We advance the foundations of machine intelligence, quantum science, medicine, neurotechnology, robotics and
-            open silicon — published openly, reproducible, and for the public good.
+            We advance the foundations of machine intelligence, quantum science, medicine, neurotechnology, geopolitics and
+            computer vision — published openly, reproducible, and for the public good.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Link to="/divisions" className="rounded-md bg-primary px-5 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90">
@@ -96,35 +96,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-20">
-        <SectionHead eyebrow="Projects" title="Long-running programmes" to="/projects" cta="All projects" />
-        <div className="grid gap-4 md:grid-cols-2">
-          {projects.filter((p) => p.featured).slice(0, 4).map((p) => (
-            <Link key={p.id} to="/projects/$slug" params={{ slug: p.slug }} className="rounded-md border border-border p-6 transition-colors hover:border-primary/40">
-              <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                {p.project_divisions.map((d) => d.divisions?.short_name).join(" · ")} · {p.status}
-              </p>
-              <h3 className="mt-2 text-lg font-semibold">{p.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{p.summary}</p>
-            </Link>
-          ))}
-        </div>
-      </section>
-
       <section className="mx-auto grid max-w-7xl gap-12 px-5 pb-8 lg:grid-cols-2">
-        <div>
-          <SectionHead eyebrow="News" title="Latest announcements" to="/news" cta="All news" />
-          <ul className="divide-y divide-border border-y border-border">
-            {news.map((n) => (
-              <li key={n.id}>
-                <Link to="/news/$slug" params={{ slug: n.slug }} className="block py-5 hover:text-primary">
-                  <p className="font-mono text-xs text-muted-foreground">{new Date(n.published_at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}</p>
-                  <p className="mt-1 font-medium">{n.title}</p>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
         <div>
           <SectionHead eyebrow="People" title="Division leads" to="/researchers" cta={`All ${researchers.length} researchers`} />
           <ul className="grid grid-cols-2 gap-3">
