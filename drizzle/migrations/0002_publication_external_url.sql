@@ -1,0 +1,2 @@
+ALTER TABLE public.publications ADD COLUMN IF NOT EXISTS external_url text;
+ALTER TABLE public.publications ADD CONSTRAINT publications_external_url_check CHECK (external_url IS NULL OR external_url ~* '^https?://');

@@ -385,6 +385,7 @@ export type Database = {
           created_at: string
           created_by: string | null
           doi: string | null
+          external_url: string | null
           featured: boolean
           id: string
           import_batch_id: string | null
@@ -407,6 +408,7 @@ export type Database = {
           created_at?: string
           created_by?: string | null
           doi?: string | null
+          external_url?: string | null
           featured?: boolean
           id?: string
           import_batch_id?: string | null
@@ -429,6 +431,7 @@ export type Database = {
           created_at?: string
           created_by?: string | null
           doi?: string | null
+          external_url?: string | null
           featured?: boolean
           id?: string
           import_batch_id?: string | null
