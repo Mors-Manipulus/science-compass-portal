@@ -136,7 +136,7 @@ function AdminPublications() {
           <Button size="sm" variant="secondary" disabled={!bulkDivs.length} onClick={() => setConfirm({ label: `Replace divisions on ${ids.length} paper(s) with the chosen divisions?`, run: () => bulkDivisions("replace") })}>Replace</Button>
           <Button size="sm" variant="secondary" onClick={() => setConfirm({ label: `Mark ${ids.length} paper(s) as Unassigned?`, run: () => bulkDivisions("clear") })}>Unassign</Button>
           <span className="mx-1 text-muted-foreground">|</span>
-          <select aria-label="Set status" className={sel} value="" onChange={(e) => { const v = e.target.value as "published"; if (v) setConfirm({ label: `Set ${ids.length} paper(s) to “${v.replace("_", " ")}”?`, run: () => bulkStatus(v) }); }}>
+          <select aria-label="Set status" className={sel} value="" onChange={(e) => { const v = e.target.value as "published"; if (v) setConfirm({ label: `Set ${ids.length} paper(s) to “${v.replace("_", " ")}”?`, run: async () => { await bulkStatus(v); } }); }}>
             <option value="">Set status…</option>
             {["published", "in_review", "draft", "archived"].map((s) => <option key={s} value={s}>{s.replace("_", " ")}</option>)}
           </select>

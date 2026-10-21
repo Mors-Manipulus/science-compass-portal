@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Download, FileText } from "lucide-react";
+import { Download, ExternalLink, FileText } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { getPdfUrl } from "@/lib/data/public";
@@ -39,7 +39,7 @@ export function AuthorList({ p }: { p: PublicationListItem }) {
 
 export function PdfActions({ p, size = "sm" }: { p: PublicationListItem; size?: "sm" | "lg" }) {
   const [busy, setBusy] = useState(false);
-  if (!p.pdf_path) {
+  if (!p.pdf_path && !p.external_url) {
     return <span className="font-mono text-xs text-muted-foreground">PDF not yet available</span>;
   }
   const run = async (download: boolean) => {
@@ -60,14 +60,25 @@ export function PdfActions({ p, size = "sm" }: { p: PublicationListItem; size?: 
     size === "lg"
       ? "inline-flex items-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium"
       : "inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium";
+  const primary = `${cls} bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-60`;
+  const outline = `${cls} border border-border hover:bg-accent disabled:opacity-60`;
   return (
     <div className="flex flex-wrap gap-2">
-      <button disabled={busy} onClick={() => run(false)} className={`${cls} bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-60`}>
-        <FileText className="h-3.5 w-3.5" /> View PDF
-      </button>
-      <button disabled={busy} onClick={() => run(true)} className={`${cls} border border-border hover:bg-accent disabled:opacity-60`}>
-        <Download className="h-3.5 w-3.5" /> Download
-      </button>
+      {p.pdf_path && (
+        <>
+          <button disabled={busy} onClick={() => run(false)} className={primary}>
+            <FileText className="h-3.5 w-3.5" /> View PDF
+          </button>
+          <button disabled={busy} onClick={() => run(true)} className={outline}>
+            <Download className="h-3.5 w-3.5" /> Download
+          </button>
+        </>
+      )}
+      {p.external_url && (
+        <a href={p.external_url} target="_blank" rel="noopener noreferrer" className={p.pdf_path ? outline : primary}>
+          <ExternalLink className="h-3.5 w-3.5" /> View paper
+        </a>
+      )}
     </div>
   );
 }

@@ -6,6 +6,11 @@ import { PUBLICATION_SELECT, type PublicationListItem } from "./types";
 
 export const PAGE_SIZE = 10;
 
+function checkList<T>(res: { data: T[] | null; error: { message: string } | null }): T[] {
+  if (res.error) throw new Error(res.error.message);
+  return res.data ?? [];
+}
+
 function check<T>(res: { data: T; error: { message: string } | null }): T {
   if (res.error) throw new Error(res.error.message);
   return res.data;
@@ -15,7 +20,7 @@ export const divisionsQuery = () =>
   queryOptions({
     queryKey: ["divisions"],
     queryFn: async () =>
-      check(await supabase.from("divisions").select("*").order("sort_order")),
+      checkList(await supabase.from("divisions").select("*").order("sort_order")),
   });
 
 export const divisionQuery = (slug: string) =>
@@ -141,7 +146,7 @@ export const researchersQuery = () =>
   queryOptions({
     queryKey: ["researchers"],
     queryFn: async () =>
-      check(
+      checkList(
         await supabase
           .from("researchers")
           .select("id,slug,name,role_title,photo_url,interests,researcher_divisions(divisions(slug,short_name,name))")
@@ -185,7 +190,7 @@ export const projectsQuery = () =>
   queryOptions({
     queryKey: ["projects"],
     queryFn: async () =>
-      check(
+      checkList(
         await supabase
           .from("projects")
           .select("id,slug,title,summary,status,start_year,featured,image_url,project_divisions(divisions(slug,short_name,name))")
@@ -219,7 +224,7 @@ export const newsQuery = (limit?: number) =>
         .lte("published_at", new Date().toISOString())
         .order("published_at", { ascending: false });
       if (limit) q = q.limit(limit);
-      return check(await q);
+      return checkList(await q);
     },
   });
 

@@ -6,7 +6,7 @@ export function metadataIssues(p: PublicationListItem) {
   if (!p.pub_date) out.push("date");
   if (!p.publication_authors.length) out.push("authors");
   if (!p.publication_divisions.length) out.push("division");
-  if (!p.pdf_path) out.push("PDF");
+  if (!p.pdf_path && !p.external_url) out.push("PDF");
   return out;
 }
 

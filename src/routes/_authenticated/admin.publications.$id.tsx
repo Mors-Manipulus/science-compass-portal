@@ -22,12 +22,12 @@ export const Route = createFileRoute("/_authenticated/admin/publications/$id")({
 
 type Status = "draft" | "in_review" | "published" | "archived";
 type Form = {
-  title: string; abstract: string; pub_date: string; venue: string; doi: string;
+  title: string; abstract: string; pub_date: string; venue: string; doi: string; external_url: string;
   status: Status; visibility: "public" | "private"; featured: boolean;
   authors: { name: string; researcher_id: string | null }[];
   divisionIds: string[];
 };
-const EMPTY: Form = { title: "", abstract: "", pub_date: "", venue: "", doi: "", status: "draft", visibility: "public", featured: false, authors: [], divisionIds: [] };
+const EMPTY: Form = { title: "", abstract: "", pub_date: "", venue: "", doi: "", external_url: "", status: "draft", visibility: "public", featured: false, authors: [], divisionIds: [] };
 
 function EditPublication() {
   const { id } = Route.useParams();
@@ -71,7 +71,7 @@ function EditPublication() {
     const r = record.data;
     if (!r) return;
     const f: Form = {
-      title: r.title, abstract: r.abstract, pub_date: r.pub_date ?? "", venue: r.venue ?? "", doi: r.doi ?? "",
+      title: r.title, abstract: r.abstract, pub_date: r.pub_date ?? "", venue: r.venue ?? "", doi: r.doi ?? "", external_url: r.external_url ?? "",
       status: r.status, visibility: r.visibility, featured: r.featured,
       authors: [...r.publication_authors].sort((a, b) => a.position - b.position).map((a) => ({ name: a.author_name, researcher_id: a.researcher_id })),
       divisionIds: r.publication_divisions.map((d) => d.division_id),
@@ -87,6 +87,7 @@ function EditPublication() {
   const errors: string[] = [];
   if (!form.title.trim()) errors.push("Title is required.");
   if (form.doi && !/^10\.\d{4,9}\/\S+$/.test(form.doi.trim())) errors.push("DOI should look like 10.xxxx/yyyy (without https://doi.org/).");
+  if (form.external_url.trim() && !/^https?:\/\/\S+$/i.test(form.external_url.trim())) errors.push("Publication link must start with http:// or https://.");
   if (form.authors.some((a) => !a.name.trim())) errors.push("Every author needs a name.");
   const warnings: string[] = [];
   if (!form.divisionIds.length) warnings.push("No division assigned — this paper will show as Unassigned.");
@@ -99,7 +100,7 @@ function EditPublication() {
     try {
       const payload = {
         title: form.title.trim(), abstract: form.abstract.trim(), pub_date: form.pub_date || null,
-        venue: form.venue.trim() || null, doi: form.doi.trim() || null,
+        venue: form.venue.trim() || null, doi: form.doi.trim() || null, external_url: form.external_url.trim() || null,
         status: form.status, visibility: form.visibility, featured: form.featured,
       };
       let pubId = id;
@@ -292,6 +293,12 @@ function EditPublication() {
           </div>
           {progress !== null && <div className="mt-3"><Progress value={progress} /><p className="mt-1 font-mono text-xs">{progress}%</p></div>}
           <p className="mt-2 text-xs text-muted-foreground">PDF only, up to 25 MB.{isNew ? " The file uploads when you create the publication." : ""}</p>
+        </fieldset>
+
+        <fieldset className="rounded-md border border-border p-4">
+          <legend className="px-1 text-sm font-medium">Publication link</legend>
+          <input id="ext" type="url" aria-label="Publication link" placeholder="https://journal.com/your-paper" className={fieldCls} value={form.external_url} onChange={(e) => up("external_url", e.target.value)} />
+          <p className="mt-2 text-xs text-muted-foreground">Use this instead of a PDF, or alongside it.</p>
         </fieldset>
 
         {(errors.length > 0 || warnings.length > 0) && (
